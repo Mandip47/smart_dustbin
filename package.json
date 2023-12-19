@@ -2,9 +2,9 @@
   "name": "arduino",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "testData.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/testData.js"
   },
   "author": "",
   "license": "ISC",

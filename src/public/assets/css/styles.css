@@ -76,7 +76,27 @@ body {
 .battery__text {
   margin-bottom: .5rem;
 }
+/* battery indicator */
+.battery__text::after {
+  content: ''; /* Required for the pseudo-element to appear */
+  display: inline-block; /* Ensures the pseudo-element is treated as an inline block */
+  width: 10px; /* Adjust the width as needed */
+  height: 10px; /* Adjust the height as needed */
+  margin-left: 5px; /* Adjust the spacing between text and indicator as needed */
+  background-color: green; /* or red */
+  border-radius: 50%; /* Creates a circular shape */
+}
 
+/* If you want a green indicator, you can use the following */
+.battery__text.green::after {
+  background-color: green;
+}
+
+.battery__text.red::after {
+  background-color: red;
+}
+
+/*  */
 .battery__percentage {
   font-size: var(--biggest-font-size);
 }
