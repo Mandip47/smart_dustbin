@@ -3,11 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arduino test</title>
+    <!--=============== REMIXICONS ===============-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <title>Dustbin Indicator</title>
     <script type="module" defer src="index.js"></script>
   </head>
   <body>
-    <h1>Arduino test</h1>
-    <p></p>
+    <!--=============== BATTERY ===============-->
+    <section class="battery">
+      <div class="battery__card">
+        <div class="battery__data">
+          <p class="battery__text">Dustbin</p>
+          <h1 class="battery__percentage">20%</h1>
+
+          <p class="battery__status">
+            Empty and Ready <i class="ri-plug-line"></i>
+          </p>
+        </div>
+
+        <div class="battery__pill">
+          <div class="battery__level">
+            <div class="battery__liquid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--=============== MAIN JS ===============-->
+    <script src="assets/js/main.js"></script>
   </body>
 </html>
