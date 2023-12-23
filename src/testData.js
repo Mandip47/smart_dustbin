@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 //for discord 
 console.log("this is discord ai ");
-const discordToken = "MTE4ODA3NjQ2NjQ5NjM0NDExNQ.GPo8R4.qFGyTZn8IvnxCSaUtqvwtpKcQcbMUwSIvp5RFs"; // Replace with your Discord bot token
+const discordToken = "MTE4ODA3NjQ2NjQ5NjM0NDExNQ.GC_cXD.YUIY5CY1Jk1tVbq5ezfxviPzwIhjUDV_BRLvuc"; // Replace with your Discord bot token
 
 const bot = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMembers,IntentsBitField.Flags.GuildMessages,IntentsBitField.Flags.MessageContent]
@@ -44,7 +44,7 @@ socketIO.on("connection", (socket) => {
     if (Math.ceil(dataOfDustbin.value * 0.909) == 100) {
       const channel = bot.channels.cache.get('1188078011745050727'); // Replace with your Discord channel ID
       if (channel) {
-        channel.send('DUSTBIN FULL!');
+        channel.send('DUSTBIN 1 FULL!');
       }
     }
 
