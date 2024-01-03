@@ -42,8 +42,19 @@ const updateBattery = (data) => {
   /* 1. We update the number level of the battery */
   if (data.value > maxLength && data.value && data.value < 0) return;
 
-  let level = Math.ceil(data.value * 0.909);
+  // for normal
+  // let level = Math.ceil(data.value * 0.909);
   // let level = 100; // just test
+
+  // opposite to normal or requires value 
+  //////
+  
+  let level = Math.ceil((1 - data.value / maxLength) * 100);
+
+// Ensure level is between 0 and 100
+  level = Math.max(0, Math.min(100, level));
+  ///////
+
 
   batteryPercentage.innerHTML = level + "%";
 

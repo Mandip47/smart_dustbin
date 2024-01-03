@@ -6,7 +6,8 @@ const path = require("path");
 
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const bot = require('/workspaces/smart_dustbin/src/public/assets/js/discordAI.js');
+
+// const bot = require('/workspaces/smart_dustbin/src/public/assets/js/discordAI.js');
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -19,7 +20,7 @@ io.on("connection", (socket) => {
 });
 
 const serialPort = new serialport.SerialPort({
-  path: "COM5",
+  path: "COM7",
   baudRate: 9600,
   dataBits: 8,
   parity: "none",
@@ -36,6 +37,7 @@ serialPort.on("open", () => {
 });
 
 parser.on("data", (data) => {
+  console.log(data);
   if (+data === 1) {
     console.log(data);
     io.emit("data", { msg: "LED IS ON" });
