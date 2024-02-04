@@ -8,12 +8,13 @@ const batteryLiquid = document.querySelector(".battery__liquid"),
   batteryStatus = document.querySelector(".battery__status"),
   batteryPercentage = document.querySelector(".battery__percentage"),
   batteryText = document.querySelector(".battery__text");
-const maxLength = 110;
+const maxLength = 30;
 
 socket.on("fakeData", (data) => {
   console.log("main : ", data);
   updateBattery(data);
-  toggleRedAndGreenClass(data.info);
+  // toggleRedAndGreenClass(data.info);
+  toggleRedAndGreenClass(data.dustbinInfo);
   // text.innerHTML = data.msg;
 });
 
@@ -32,7 +33,7 @@ function toggleRedAndGreenClass(condition) {
   if (condition === 1) {
     batteryText.classList.add("green");
     batteryText.classList.add("animited-green");
-  } else {
+  } else if(condition === 0) {
     batteryText.classList.add("red");
     batteryText.classList.add("animited-red");
   }
@@ -40,7 +41,8 @@ function toggleRedAndGreenClass(condition) {
 
 const updateBattery = (data) => {
   /* 1. We update the number level of the battery */
-  if (data.value > maxLength && data.value && data.value < 0) return;
+  // if (data.value > maxLength && data.value && data.value < 0) return;
+  if (data.value > maxLength && data.valueInsideSensor && data.valueInsideSensor < 0) return;
 
   // for normal
   // let level = Math.ceil(data.value * 0.909);
@@ -49,7 +51,7 @@ const updateBattery = (data) => {
   // opposite to normal or requires value 
   //////
   
-  let level = Math.ceil((1 - data.value / maxLength) * 100);
+  let level = Math.ceil((1 - data.valueInsideSensor / maxLength) * 100);
 
 // Ensure level is between 0 and 100
   level = Math.max(0, Math.min(100, level));

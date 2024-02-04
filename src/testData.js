@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 //for discord 
 console.log("this is discord ai ");
 
-const discordToken = "MTE4ODA3NjQ2NjQ5NjM0NDExNQ.GwDfKF.33AGKlXJCuhoMzQ0rO8P6fvNioJQ1ojI17uZVc"; // Replace with your Discord bot token
+const discordToken = "MTE4ODA3NjQ2NjQ5NjM0NDExNQ.GiWR56.QwPDWwCSUmfmvut-5sOSIgiuO8hwqubPIAI22E"; // Replace with your Discord bot token
 
 const bot = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMembers,IntentsBitField.Flags.GuildMessages,IntentsBitField.Flags.MessageContent]
@@ -41,7 +41,7 @@ bot.on('ready',(c)=>{
 // for serial port
 const serialPort = new serialport.SerialPort({
   path: "COM7",
-  baudRate: 9600,
+  baudRate: 1200,
   dataBits: 8,
   parity: "none",
   stopBits: 1,
@@ -81,36 +81,36 @@ parser.on("data", (data) => {
 
   // set inverval of 2 sec 
 
-  const dataInterval = setInterval(() => {
+  const processData = () => {
     const data1 = jsonObject.valueInsideSensor;
-    // const data1 = 100;
     const infoData = jsonObject.dustbinInfo;
-    const dataOfDustbin = { value: data1 , info: infoData}
+    const dataOfDustbin = { value: data1, info: infoData };
 
     console.log(dataOfDustbin);
-    socketIO.emit("fakeData",dataOfDustbin);
+    socketIO.emit("fakeData", dataOfDustbin);
 
-    // updated code 
-    
+    if (Math.ceil((1 - dataOfDustbin.value / 30) * 100) >= 100) {
+        const channel = bot.channels.cache.get('1188078011745050727');
+        if (channel) {
+            count++;
+            channel.send(`COUNT ${count} : DUSTBIN BAGAR FULL!`);
+        }
+    }
 
-    if (Math.ceil((1 - dataOfDustbin.value / 115) * 100) >= 100) { /// NOTE : 115 is the max length value 
+    // Process the next set of data after a delay
+    setTimeout(processData, 5000);
+};
 
-     const channel = bot.channels.cache.get('1188078011745050727'); // Replace with your Discord channel ID
-     if (channel) {
-    count++;
-    channel.send(`COUNT ${count} : DUSTBIN BAGAR FULL!`);
-          }
-      }
+// Start the initial data processing
+processData();
 
-    // old code 
-    // if (Math.ceil(dataOfDustbin.value * 0.909) >= 100) {
-    //   const channel = bot.channels.cache.get('1188078011745050727'); // Replace with your Discord channel ID
-    //   if (channel) {
-    //     count++;
-    //     channel.send(`COUNT ${count} : DUSTBIN BAGAR FULL!`);
-    //   }
-    // }
-  }, 2000)
+
+  // Move clearInterval here
+// setTimeout(() => {
+//   clearInterval(dataInterval);
+// }, 60000);
+
+
 });
 
 // local host website link
