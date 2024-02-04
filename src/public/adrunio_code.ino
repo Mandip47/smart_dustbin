@@ -1,9 +1,9 @@
 #include <Servo.h>
 
-const int trigPin1 = 7;
-const int echoPin1 = 8;  // Change this to the new echo pin for the first sensor
-const int trigPin2 = 9;  // Change this to the new trigger pin for the second sensor
-const int echoPin2 = 10;
+const int trigPin1 = 13;
+const int echoPin1 = 12;  
+const int trigPin2 = 7;  
+const int echoPin2 = 8;
 
 int inches1 = 0;
 int inches2 = 0;
@@ -22,35 +22,50 @@ long readUltrasonicDistance(int triggerPin, int echoPin) {
   pinMode(echoPin, INPUT);
   return pulseIn(echoPin, HIGH);
 }
+// Variables to store the last sensor readings
+int lastCm1 = 0;
+int lastCm2 = 0;
 
 void setup() {
   Serial.begin(9600);
   servo.attach(4);
+
+  // Initial sensor readings
+  lastCm1 = cm1 = 0.01723 * readUltrasonicDistance(trigPin1, echoPin1);
+  lastCm2 = cm2 = 0.01723 * readUltrasonicDistance(trigPin2, echoPin2);
+
 }
 
 void loop() {
-  cm1 = 0.01723 * readUltrasonicDistance(trigPin1, echoPin1);
-  cm2 = 0.01723 * readUltrasonicDistance(trigPin2, echoPin2);
+    cm1 = 0.01723 * readUltrasonicDistance(trigPin1, echoPin1);
+    cm2 = 0.01723 * readUltrasonicDistance(trigPin2, echoPin2);
 
-  Serial.print("{valueOutsideSensor: ");
-  Serial.print(cm1);
-  Serial.print(", valueInsideSensor: ");
-  Serial.print(1);
-  // Serial.print(cm2);
-  Serial.print(", dustbinInfo: ");
-  
-  if (cm2 < 35) {
-    Serial.print("1");  // Dustbin Opened
-    openDustbin();
-    delay(3000);
-  } else {
-    Serial.print("0");  // Dustbin Closed
-    closeDustbin();
-  }
+    // Check if the values have changed
+    if (cm1 != lastCm1 || cm2 != lastCm2) {
+      Serial.print("valueOutsideSensor: ");
+      Serial.print(cm1);
+      // Serial.print(", valueInsideSensor: ");
+       Serial.print(" valueInsideSensor: ");
+      Serial.print(cm2);
+      // Serial.print(", dustbinInfo: ");
+      Serial.print(" dustbinInfo: ");
 
-  Serial.println("}");
+      if (cm1 < 35) {
+        Serial.println("1");  // Dustbin Opened
+        openDustbin();
+      } else {
+        Serial.println("0");  // Dustbin Closed
+        closeDustbin();
+      }
 
-  delay(500);
+      // Serial.println("}");
+
+      // Update last sensor readings
+      lastCm1 = cm1;
+      lastCm2 = cm2;
+    }
+
+  delay(2000);  // Additional delay to avoid rapid looping
 }
 
 void openDustbin() {
