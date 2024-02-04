@@ -8,7 +8,7 @@ const batteryLiquid = document.querySelector(".battery__liquid"),
   batteryStatus = document.querySelector(".battery__status"),
   batteryPercentage = document.querySelector(".battery__percentage"),
   batteryText = document.querySelector(".battery__text");
-const maxLength = 30;
+const maxLength = 31;
 
 socket.on("fakeData", (data) => {
   console.log("main : ", data);

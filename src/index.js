@@ -22,7 +22,7 @@ let count = 0;
 //for discord 
 console.log("this is discord ai ");
 
-const discordToken = "MTE4ODA3NjQ2NjQ5NjM0NDExNQ.GiWR56.QwPDWwCSUmfmvut-5sOSIgiuO8hwqubPIAI22E"; // Replace with your Discord bot token
+const discordToken = "MTE4ODA3NjQ2NjQ5NjM0NDExNQ.GboVsZ.rMs87PDZFKYl2lZtfF3kxbZBMZmU3ZgeN3hk8o"; // Replace with your Discord bot token
 
 const bot = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMembers,IntentsBitField.Flags.GuildMessages,IntentsBitField.Flags.MessageContent]
@@ -85,12 +85,13 @@ for (let i = 0; i < keyValuePairs.length; i += 2) {
 console.log(resultObject);
 
 socketIO.emit("fakeData", resultObject);
+console.log((1 - resultObject.valueInsideSensor / 31) * 100);
 
-    if (Math.ceil((1 - resultObject.valueInsideSensor / 30) * 100) >= 100) {
+    if (Math.ceil((1 - resultObject.valueInsideSensor / 31) * 100) >= 80) {
         const channel = bot.channels.cache.get('1188078011745050727');
         if (channel) {
             count++;
-            channel.send(`COUNT ${count} : DUSTBIN BAGAR FULL!`);
+            channel.send(`COUNT ${count} : DUSTBIN BAGAR ALMOST FULL!`);
         }
     }
 
