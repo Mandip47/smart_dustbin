@@ -69,9 +69,9 @@ void loop() {
 }
 
 void openDustbin() {
-  servo.write(90);
+  servo.write(210);
 }
 
 void closeDustbin() {
-  servo.write(0);
+  servo.write(30);
 }
