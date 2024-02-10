@@ -1,4 +1,5 @@
-// this is the final code for js
+// this is the testing code for js
+
 const serialport = require("serialport");
 const Readline = require("@serialport/parser-readline");
 const path = require("path");

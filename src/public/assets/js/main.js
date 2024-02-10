@@ -13,9 +13,7 @@ const maxLength = 31;
 socket.on("fakeData", (data) => {
   console.log("main : ", data);
   updateBattery(data);
-  // toggleRedAndGreenClass(data.info);
   toggleRedAndGreenClass(data.dustbinInfo);
-  // text.innerHTML = data.msg;
 });
 
 function toggleRedAndGreenClass(condition) {
@@ -44,7 +42,7 @@ const updateBattery = (data) => {
   // if (data.value > maxLength && data.value && data.value < 0) return;
   if (data.value > maxLength && data.valueInsideSensor && data.valueInsideSensor < 0) return;
 
-  // for normal
+  // for test data
   // let level = Math.ceil(data.value * 0.909);
   // let level = 100; // just test
 
@@ -60,25 +58,18 @@ const updateBattery = (data) => {
 
   batteryPercentage.innerHTML = level + "%";
 
-  /* 2. We update the background level of the battery */
+  /* 2. We update the background level of the dustbin */
   batteryLiquid.style.height = `${parseInt(level)}%`;
 
-  /* 3. We validate full battery, low battery and if it is charging or not */
-
-  // batteryText.innerHTML = data.info ? `Dustbin <i class="ri-mail-open-line"></i>` : `Dustbin <i class="ri-mail-line"></i>` ;
-
   if (level == 100) {
-    /* We validate if the battery is full */
-    // batteryStatus.innerHTML = `Full and Needs Emptying <i class="ri-battery-2-fill green-color"></i>`;
+    /* We validate if the dustbin is full */
     batteryStatus.innerHTML = `Full and Needs Emptying <i class="ri-archive-drawer-line green-color"></i>`;
     batteryLiquid.style.height = "103%"; /* To hide the ellipse */
   } else if (level <= 5) {
-    /* We validate if the battery is low */
-    // batteryStatus.innerHTML = `Empty and Ready <i class="ri-plug-line animated-red"></i>`;
+    /* We validate if the dustbin is low */
     batteryStatus.innerHTML = `Empty and Ready <i class="ri-archive-2-line animated-red"></i>`;
   } else if (level > 5 && level <= 99) {
-    /* We validate if the battery is charging */
-    // batteryStatus.innerHTML = `In Progress... <i class="ri-flashlight-line animated-green"></i>`;
+    /* We validate if the dustbin is filling */
     batteryStatus.innerHTML = `In Progress... <i class="ri-archive-stack-line animated-green"></i>`;
   } else {
     /* If it's not loading, don't show anything. */
