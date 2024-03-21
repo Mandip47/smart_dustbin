@@ -49,7 +49,7 @@ This project involves creating a smart dustbin system that utilizes sensors, mic
 <figure>
   <img src="https://github.com/Mandip47/smart_dustbin/assets/108076760/1fc64b38-7dd9-4aeb-a064-c780e4f8fadd" style="width: 48%;" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/Mandip47/smart_dustbin/assets/108076760/356666e0-cbef-42cc-80b9-b38468ff4d74" alt="Image 2" style="width:48%;"/>
+  <img src="https://github.com/Mandip47/smart_dustbin/assets/108076760/356666e0-cbef-42cc-80b9-b38468ff4d74" alt="Image 2" style="width:38%;"/>
 </figure>
 <hr>
 &nbsp;&nbsp;&nbsp;&nbsp;
