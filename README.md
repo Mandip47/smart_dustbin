@@ -60,4 +60,4 @@ This project involves creating a smart dustbin system that utilizes sensors, mic
 
 ## Video Demo
 
-comming soon..
+[Watch short video](https://youtu.be/03QzmQV6a2o)
