@@ -57,6 +57,8 @@ This project involves creating a smart dustbin system that utilizes sensors, mic
   <img src="https://github.com/Mandip47/smart_dustbin/assets/108076760/de6b2d48-27a3-4a4a-8bb6-2808e01b215f" style="width: 50%;" />
 </figure>
 
+## Simulation of Arduino
+[CLick to View](https://www.tinkercad.com/things/0yE8XggpjRl-smart-dustbin-simulation)
 
 ## Video Demo
 
